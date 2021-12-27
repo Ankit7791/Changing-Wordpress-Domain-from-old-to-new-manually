@@ -15,3 +15,15 @@ For replacing the URL across all database tables, Click on SQL tab and in the pa
     UPDATE wp_links SET link_url = replace(link_url, 'Existing URL','New URL');
 
     UPDATE wp_comments SET comment_content = replace(comment_content , 'Existing URL','New URL');
+    
+    
+    
+    
+ # 301 REDIRECT HTTP TO HTTPS AND NON-WWW TO WWW
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://www.%1%{REQUEST_URI} [L,NE,R=301]
+</IfModule>
